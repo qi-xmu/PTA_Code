@@ -5,12 +5,16 @@ typedef struct BiNode
 	int data;
 	struct BiNode* lc, * rc;
 }BiNode, *BiTree;
-
-int rebuild(int post[],int in[],int len, BiTree T)
+// 重构二叉树
+BiTree rebuild(int post[],int in[],int len, BiTree &T)
 {
+	// 长度为0时，递归退出
+	if (len == 0)
+		return NULL;
 
 	// 根结点
-	int root = post[len];
+	T = (BiTree)malloc(sizeof(BiNode));
+	int root = post[len-1];
 	T->data = root;
 	// 寻找root在in的位置
 	int p = 0;
@@ -19,12 +23,11 @@ int rebuild(int post[],int in[],int len, BiTree T)
 		if (in[p] == root)
 			break;
 	}
-	T->lc = (BiTree)(sizeof(BiNode));
-	rebuild(post, in, p, T->lc);
-	T->rc = (BiTree)(sizeof(BiNode));
-	rebuild(&post[len], &in[len + 1], len - p,T->rc);
 
-	return root;
+	// 
+	T->lc=rebuild(post, in, p, T->lc);
+	T->rc = rebuild(&post[p], &in[p + 1], len - p - 1, T->rc);
+	return T;
 }
 
 int main()
@@ -45,6 +48,8 @@ int main()
 	{
 		scanf("%d", &inorder[i]);
 	}
+	BiTree T = NULL;
+	rebuild(postorder, inorder, 7, T);
 	
 	return 0;
 }
