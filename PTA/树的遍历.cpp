@@ -6,7 +6,6 @@ typedef struct BiNode
 	struct BiNode* lc, * rc;
 }BiNode, * BiTree;
 
-
 // 重构二叉树
 BiTree rebuild(int post[], int in[], int len, BiTree& T)
 {
@@ -30,12 +29,12 @@ BiTree rebuild(int post[], int in[], int len, BiTree& T)
 
 void output(BiTree T)
 {
+	// 这里不想写队列了……可以直接用顺序结构写，因为N<30 队列最大数不会超过30
 	BiTree queue[101];
-	int base = 0;
-	int top = 0;
+	int base = 0;  int top = 0;
+	// 这里存储答案，方便格式打印
+	int res[50];  int p = 0;
 	queue[top++] = T;
-	int res[50];
-	int p = 0;
 	while (1)
 	{
 		if (top == base)
@@ -49,7 +48,7 @@ void output(BiTree T)
 			queue[top++] = Root->rc;
 		}
 	}
-
+	// 打印结果
 	for (int i = 0; i < p; i++)
 	{
 		printf("%d", res[i]);
@@ -62,15 +61,17 @@ int main()
 {
 	int n;
 	int postorder[50];	// 后序排列
-	int inorder[50];	// 中序排列
+	int inorder[50];		// 中序排列
 	// 输入
 	scanf("%d", &n);
 	for (int i = 0; i < n; i++)
 		scanf("%d", &postorder[i]);
 	for (int i = 0; i < n; i++)
 		scanf("%d", &inorder[i]);
+
 	BiTree T = NULL;
 	rebuild(postorder, inorder, n, T);
+	// 输出
 	output(T);
 	return 0;
 }
