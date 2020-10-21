@@ -1,22 +1,22 @@
-#include<stdio.h>
+ï»¿#include<stdio.h>
 #include<malloc.h>
 typedef struct BiNode
 {
 	int data;
 	struct BiNode* lc, * rc;
 }BiNode, * BiTree;
-// ÖØ¹¹¶ş²æÊ÷
+// é‡æ„äºŒå‰æ ‘
 BiTree rebuild(int post[], int in[], int len, BiTree& T)
 {
-	// ³¤¶ÈÎª0Ê±£¬µİ¹éÍË³ö
+	// é•¿åº¦ä¸º0æ—¶ï¼Œé€’å½’é€€å‡º
 	if (len == 0)
 		return NULL;
 
-	// ¸ù½áµã
+	// æ ¹ç»“ç‚¹
 	T = (BiTree)malloc(sizeof(BiNode));
 	int root = post[len - 1];
 	T->data = root;
-	// Ñ°ÕÒrootÔÚinµÄÎ»ÖÃ
+	// å¯»æ‰¾rootåœ¨inçš„ä½ç½®
 	int p = 0;
 	for (; p < len; p++)
 	{
@@ -33,9 +33,9 @@ BiTree rebuild(int post[], int in[], int len, BiTree& T)
 int main()
 {
 	int n;
-	int postorder[50];	// ºóĞòÅÅÁĞ
-	int inorder[50];	// ÖĞĞòÅÅÁĞ
-	// ÊäÈë
+	int postorder[50];	// ååºæ’åˆ—
+	int inorder[50];	// ä¸­åºæ’åˆ—
+	// è¾“å…¥
 	scanf("%d", &n);
 
 	//BiTree T;
